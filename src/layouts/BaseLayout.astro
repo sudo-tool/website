@@ -126,6 +126,10 @@ const ogImageURL = new URL(ogImagePath, site).href;
       });
 
       // legacy modal handling (kept for ImageModal)
+      const lockScroll = () => {
+        const anyOpen = [...document.querySelectorAll('[id^="modal-"]')].some((m) => !m.classList.contains('hidden'));
+        document.body.style.overflow = anyOpen ? 'hidden' : '';
+      };
       document.querySelectorAll('[data-modal-target]').forEach((el) => {
         el.addEventListener('click', () => {
           const modalId = el.getAttribute('data-modal-target');
@@ -133,24 +137,25 @@ const ogImageURL = new URL(ogImagePath, site).href;
           const modal = document.getElementById(modalId);
           if (modal) {
             modal.classList.remove('hidden');
+            modal.classList.add('flex');
             requestAnimationFrame(() => modal.classList.add('visible'));
+            lockScroll();
           }
         });
       });
 
       document.querySelectorAll('[id^="modal-"]').forEach((modal) => {
         const closeButton = modal.querySelector('button');
+        const hide = () => {
+          modal.classList.add('hidden');
+          modal.classList.remove('flex', 'visible');
+          lockScroll();
+        };
         if (closeButton) {
-          closeButton.addEventListener('click', () => {
-            modal.classList.add('hidden');
-            modal.classList.remove('visible');
-          });
+          closeButton.addEventListener('click', hide);
         }
         modal.addEventListener('click', (e) => {
-          if (e.target === modal) {
-            modal.classList.add('hidden');
-            modal.classList.remove('visible');
-          }
+          if (e.target === modal) hide();
         });
       });
 
@@ -158,8 +163,9 @@ const ogImageURL = new URL(ogImagePath, site).href;
         if (e.key !== 'Escape') return;
         document.querySelectorAll('[id^="modal-"]').forEach((modal) => {
           modal.classList.add('hidden');
-          modal.classList.remove('visible');
+          modal.classList.remove('flex', 'visible');
         });
+        lockScroll();
       });
     </script>
     <style>
