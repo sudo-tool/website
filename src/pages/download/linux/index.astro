@@ -10,30 +10,34 @@ const version = latest.version;
   description="Download Legcord for Linux. AppImage, .deb, Flatpak. Lightweight Discord client for x64 and AArch64, Wayland and X11."
   canonical="/download/linux"
 >
-  <div class="py-16">
-    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
-      <h1 class="text-4xl font-bold text-center text-white mb-8">Download Legcord for Linux</h1>
-      <h2 class="text-2xl font-semibold text-white mb-8 text-center">Choose your preferred installation method:</h2>
+  <div class="relative py-16 overflow-hidden">
+    <div class="orb right-[8%] top-[-6%] h-[380px] w-[420px]" style="background: radial-gradient(circle, rgba(52,211,153,.14), transparent 70%);"></div>
+    <div class="relative mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <div class="reveal visible text-center mb-10">
+        <span class="eyebrow">Wayland • X11 • x64 • ARM64</span>
+        <h1 class="mt-4 font-display text-4xl sm:text-5xl font-extrabold text-white">Download Legcord for Linux</h1>
+      </div>
+      <h2 class="reveal text-xl font-bold text-white/80 mb-8 text-center font-display">Choose your preferred installation method:</h2>
       <div class="space-y-8">
-        <div>
-          <h3 class="text-xl font-semibold text-white mb-4 text-center">Package Managers</h3>
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="reveal">
+          <h3 class="text-lg font-bold text-white mb-4 text-center font-display flex items-center justify-center gap-3"><span class="h-px w-10 bg-gradient-to-r from-transparent to-[#818cf8]/60"></span>Package Managers<span class="h-px w-10 bg-gradient-to-l from-transparent to-[#818cf8]/60"></span></h3>
+          <div class="stagger grid grid-cols-1 md:grid-cols-2 gap-5">
             <Button name="Flatpak" href="https://github.com/Legcord/Legcord?tab=readme-ov-file#flatpak" target="_blank" rel="noopener noreferrer" description="Universal Linux package" />
             <Button name="AUR" href="https://aur.archlinux.org/packages/legcord-bin" target="_blank" rel="noopener noreferrer" description="Arch User Repository" />
             <Button name="Debian/Ubuntu" href="https://github.com/Legcord/Legcord?tab=readme-ov-file#debian-ubuntu-and-raspbian-repository" target="_blank" rel="noopener noreferrer" description="Official APT repository" />
             <Button name="Snap" href="https://snapcraft.io/legcord" target="_blank" rel="noopener noreferrer" description="Containerised snap" />
           </div>
         </div>
-        <div>
-          <h3 class="text-xl font-semibold text-white mb-4 text-center">Direct Downloads</h3>
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="reveal">
+          <h3 class="text-lg font-bold text-white mb-4 text-center font-display flex items-center justify-center gap-3"><span class="h-px w-10 bg-gradient-to-r from-transparent to-[#67e8f9]/60"></span>Direct Downloads<span class="h-px w-10 bg-gradient-to-l from-transparent to-[#67e8f9]/60"></span></h3>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-5 max-w-xl mx-auto">
             <Button name="Github Releases" href={`https://github.com/Legcord/Legcord/releases/tag/v${version}`} target="_blank" rel="noopener noreferrer" description="RPM/AppImage/debs/tarballs and more." />
           </div>
         </div>
       </div>
-      <div class="mt-8 text-center">
-        <p class="text-gray-300">
-          For other package managers, please visit our <a href="https://github.com/Legcord/Legcord" target="_blank" rel="noopener noreferrer" class="text-blue-400 hover:underline">GitHub repository</a>.
+      <div class="reveal mt-8 text-center">
+        <p class="text-gray-300 text-sm glass inline-block rounded-2xl px-6 py-4">
+          For other package managers, please visit our <a href="https://github.com/Legcord/Legcord" target="_blank" rel="noopener noreferrer" class="text-[#a5b4fc] hover:text-white link-underline">GitHub repository</a>.
         </p>
       </div>
     </div>

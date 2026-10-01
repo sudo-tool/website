@@ -2,10 +2,17 @@
 const { vectorIcon, name, href, description } = Astro.props;
 ---
 
-<a href={href} class="group flex h-full flex-col items-center rounded-2xl border border-white/10 bg-white/5 p-6 text-center shadow-[0_14px_45px_rgba(0,0,0,0.35)] transition hover:-translate-y-0.5 hover:border-white/15 hover:bg-white/7">
-  <div class="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-2xl border border-white/10 bg-white/5 shadow-[0_10px_25px_rgba(0,0,0,0.35)]">
-    <img src={vectorIcon} alt={name} class="h-9 w-9 invert opacity-90 transition group-hover:opacity-100" />
+<a href={href} data-tilt class="reveal group relative flex h-full flex-col items-center overflow-hidden rounded-[22px] border border-white/10 bg-gradient-to-b from-white/[0.08] to-white/[0.025] p-8 text-center backdrop-blur-xl shadow-card card-lift">
+  <div class="absolute inset-x-10 top-0 h-px bg-gradient-to-r from-transparent via-[#67e8f9]/50 to-transparent"></div>
+  <div class="absolute -top-20 left-1/2 h-40 w-[120%] -translate-x-1/2 rounded-full bg-[radial-gradient(closest-side,rgba(88,101,242,.25),transparent)] blur-2xl opacity-0 group-hover:opacity-100 transition duration-700"></div>
+  <div class="relative mb-5">
+    <div class="absolute -inset-3 rounded-[24px] bg-gradient-to-br from-[#5865f2]/45 via-[#67e8f9]/20 to-[#a78bfa]/35 blur-xl opacity-50 group-hover:opacity-90 transition duration-700"></div>
+    <div class="relative inline-flex h-[76px] w-[76px] items-center justify-center rounded-[22px] border border-white/15 bg-gradient-to-b from-[#1a2150] to-[#0b1122] shadow-card transition-transform duration-500 group-hover:scale-105 group-hover:-rotate-3">
+      <img src={vectorIcon} alt={name} class="h-10 w-10 invert opacity-90 transition group-hover:opacity-100 group-hover:scale-110 duration-500" />
+    </div>
+    <span class="absolute -right-1 -top-1 grid h-6 w-6 place-items-center rounded-full bg-emerald-400 text-[#052e1b] text-xs font-black shadow-lg scale-0 group-hover:scale-100 transition-transform duration-500">✓</span>
   </div>
-  <h2 class="text-2xl font-semibold text-white tracking-tight mb-2">{name}</h2>
-  <p class="text-sm text-white/70 leading-relaxed">{description}</p>
+  <h2 class="relative font-display text-[22px] font-bold text-white tracking-tight mb-2">{name}</h2>
+  <p class="relative text-sm text-white/60 leading-relaxed">{description}</p>
+  <span class="relative mt-5 inline-flex items-center gap-2 rounded-full border border-white/12 bg-white/[0.05] px-4 py-2 text-[13px] font-semibold text-white/75 transition-all duration-500 group-hover:border-[#818cf8]/50 group-hover:bg-[#5865f2]/25 group-hover:text-white">Choose →</span>
 </a>

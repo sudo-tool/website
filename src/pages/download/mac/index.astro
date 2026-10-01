@@ -10,25 +10,29 @@ const version = latest.version;
   description="Download Legcord for Mac. Universal binary for Apple Silicon and Intel. Lightweight Discord client with themes and mods."
   canonical="/download/mac"
 >
-  <div class="py-16">
-    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
-      <h1 class="text-4xl font-bold text-center text-white mb-12">Download Legcord for macOS</h1>
+  <div class="relative py-16 overflow-hidden">
+    <div class="orb left-[50%] top-[-12%] h-[420px] w-[560px] -translate-x-1/2" style="background: radial-gradient(circle, rgba(167,139,250,.18), transparent 70%);"></div>
+    <div class="relative mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <div class="reveal visible text-center mb-10">
+        <span class="eyebrow">Apple Silicon • Intel</span>
+        <h1 class="mt-4 font-display text-4xl sm:text-5xl font-extrabold text-white">Download Legcord for macOS</h1>
+      </div>
       <div class="max-w-2xl mx-auto">
-        <h2 class="text-2xl font-semibold text-white mb-6 text-center">Choose your macOS version:</h2>
-        <div>
-          <h3 class="text-xl font-semibold text-white mb-4 text-center">Universal binary</h3>
-          <div class="space-y-4">
+        <h2 class="reveal text-xl font-bold text-white/80 mb-6 text-center font-display">Choose your macOS version:</h2>
+        <div class="reveal glass rounded-[22px] p-6 sm:p-8 mb-5">
+          <h3 class="text-lg font-bold text-white mb-4 text-center font-display">Universal binary</h3>
+          <div class="grid gap-4">
             <Button name="DMG" href={`https://github.com/Legcord/Legcord/releases/download/v${version}/Legcord-${version}-mac-universal.dmg`} target="_blank" rel="noopener noreferrer" description="Disk image for easy installation" />
             <Button name="ZIP" href={`https://github.com/Legcord/Legcord/releases/download/v${version}/Legcord-${version}-mac-universal.zip`} target="_blank" rel="noopener noreferrer" description="Compressed archive" />
           </div>
         </div>
-        <div class="mt-8">
-          <h3 class="text-xl font-semibold text-white mb-4 text-center">Package Manager</h3>
+        <div class="reveal glass rounded-[22px] p-6 sm:p-8">
+          <h3 class="text-lg font-bold text-white mb-4 text-center font-display">Package Manager</h3>
           <Button name="Homebrew" href={`https://github.com/Legcord/Legcord?tab=readme-ov-file#homebrew-repository`} target="_blank" rel="noopener noreferrer" description="Install using Homebrew package manager" />
         </div>
-        <div class="mt-8 text-center">
-          <p class="text-gray-300">
-            <a href="https://github.com/Legcord/Legcord/issues/560#issuecomment-2073419170" target="_blank" rel="noopener noreferrer" class="text-blue-400 hover:underline">If macOS tells you the app is damaged, try this.</a>
+        <div class="mt-6 text-center">
+          <p class="text-gray-300 text-sm">
+            <a href="https://github.com/Legcord/Legcord/issues/560#issuecomment-2073419170" target="_blank" rel="noopener noreferrer" class="text-[#a5b4fc] hover:text-white link-underline">If macOS tells you the app is damaged, try this.</a>
           </p>
         </div>
       </div>

@@ -2,9 +2,15 @@
 const { name, href, description, target, rel } = Astro.props;
 ---
 
-<a href={href} target={target} rel={rel} class="group relative flex h-full flex-col justify-between rounded-2xl border border-white/10 bg-white/5 p-6 text-left shadow-[0_14px_45px_rgba(0,0,0,0.35)] transition hover:-translate-y-0.5 hover:border-white/15 hover:bg-white/7">
-  <div>
-    <h3 class="text-xl font-semibold text-white tracking-tight">{name}</h3>
-    <p class="mt-2 text-sm text-white/70 leading-relaxed">{description}</p>
+<a href={href} target={target} rel={rel} data-tilt class="reveal group relative flex h-full min-h-[148px] flex-col justify-between overflow-hidden rounded-[20px] border border-white/10 bg-gradient-to-b from-white/[0.075] to-white/[0.025] p-6 text-left backdrop-blur-xl shadow-card card-lift">
+  <div class="absolute inset-x-8 top-0 h-px bg-gradient-to-r from-transparent via-white/30 to-transparent"></div>
+  <div class="absolute -right-16 -top-16 h-40 w-40 rounded-full bg-[radial-gradient(circle,rgba(88,101,242,.32),transparent_70%)] blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
+  <div class="relative">
+    <h3 class="font-display text-xl font-bold text-white tracking-tight flex items-center gap-2">{name} <span class="text-[#818cf8] transition-transform duration-500 group-hover:translate-x-1.5 group-hover:-translate-y-0.5">↗</span></h3>
+    <p class="mt-2 text-sm text-white/60 leading-relaxed">{description}</p>
+  </div>
+  <div class="relative mt-5 inline-flex items-center gap-2 text-sm font-semibold text-[#a5b4fc]">
+    <span class="link-underline">Open</span>
+    <span class="grid h-7 w-7 place-items-center rounded-full border border-[#818cf8]/30 bg-[#5865f2]/15 transition-all duration-500 group-hover:bg-[#5865f2] group-hover:text-white group-hover:rotate-[-8deg]">→</span>
   </div>
 </a>

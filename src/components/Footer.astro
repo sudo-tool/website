@@ -1,17 +1,36 @@
-<footer class="border-t border-white/10 bg-slate-950/40">
-  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10">
-    <div class="flex flex-col items-center gap-6">
-      <ul class="flex flex-wrap justify-center gap-x-6 gap-y-2">
-        <li><a href="/download" class="text-sm font-medium text-white/65 hover:text-white transition">Download</a></li>
-        <li><a href="/" class="text-sm font-medium text-white/65 hover:text-white transition">Features</a></li>
-        <li><a href="/faq" class="text-sm font-medium text-white/65 hover:text-white transition">FAQ</a></li>
-        <li><a href="https://github.com/Legcord/Legcord" target="_blank" rel="noopener noreferrer" class="text-sm font-medium text-white/65 hover:text-white transition">GitHub</a></li>
-        <li><a href="https://discord.gg/TnhxcqynZ2" target="_blank" rel="noopener noreferrer" class="text-sm font-medium text-white/65 hover:text-white transition">Discord</a></li>
+<footer class="relative mt-10 border-t border-white/10 overflow-hidden">
+  <div class="absolute inset-0 pointer-events-none">
+    <div class="absolute left-1/2 top-0 h-px w-[70%] -translate-x-1/2 bg-gradient-to-r from-transparent via-[#818cf8]/60 to-transparent"></div>
+    <div class="orb left-[10%] bottom-[-180px] h-[380px] w-[480px]" style="background: radial-gradient(circle, rgba(88,101,242,.22), transparent 70%);"></div>
+    <div class="orb right-[8%] bottom-[-160px] h-[340px] w-[420px]" style="background: radial-gradient(circle, rgba(103,232,249,.12), transparent 70%);"></div>
+  </div>
+  <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12">
+    <div class="glass rounded-[22px] px-6 sm:px-10 py-8 flex flex-col lg:flex-row lg:items-center gap-8 justify-between overflow-hidden">
+      <div class="flex items-center gap-4">
+        <span class="relative grid h-12 w-12 place-items-center rounded-2xl border border-white/12 bg-white/[0.06] overflow-hidden shrink-0">
+          <img src="/logo.png" alt="Legcord Logo" class="h-8 w-8 object-contain" />
+          <span class="absolute inset-x-3 top-0 h-px bg-white/40"></span>
+        </span>
+        <div>
+          <p class="font-display font-bold text-white text-lg leading-tight">Legcord</p>
+          <p class="text-sm text-white/50">Lightweight Discord client for everyone.</p>
+        </div>
+      </div>
+      <ul class="flex flex-wrap gap-2">
+        <li><a href="/download" class="chip hover:!text-white hover:!border-[#818cf8]/50 hover:!bg-[#5865f2]/20 transition">Download</a></li>
+        <li><a href="/" class="chip hover:!text-white hover:!border-[#818cf8]/50 hover:!bg-[#5865f2]/20 transition">Features</a></li>
+        <li><a href="/faq" class="chip hover:!text-white hover:!border-[#818cf8]/50 hover:!bg-[#5865f2]/20 transition">FAQ</a></li>
+        <li><a href="https://github.com/Legcord/Legcord" target="_blank" rel="noopener noreferrer" class="chip hover:!text-white hover:!border-[#818cf8]/50 hover:!bg-[#5865f2]/20 transition">GitHub ↗</a></li>
+        <li><a href="https://discord.gg/TnhxcqynZ2" target="_blank" rel="noopener noreferrer" class="chip hover:!text-white hover:!border-[#818cf8]/50 hover:!bg-[#5865f2]/20 transition">Discord ↗</a></li>
       </ul>
-      <div class="text-center text-xs text-white/55 leading-relaxed">
+      <a href="/download" class="btn-primary !py-3 shrink-0">Get Legcord free</a>
+    </div>
+    <div class="mt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
+      <div class="text-xs text-white/40 leading-relaxed max-w-2xl">
         <p>Discord is a trademark of Discord Inc. Legcord is not affiliated with or endorsed by Discord Inc.</p>
         <p>Legcord is not affiliated with or endorsed by ARM Limited.</p>
       </div>
+      <p class="text-xs text-white/35 shrink-0">© {new Date().getFullYear()} Legcord Team • <a href="/faq" class="link-underline !text-white/50 hover:!text-white">Privacy & FAQ</a></p>
     </div>
   </div>
 </footer>

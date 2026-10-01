@@ -51,22 +51,90 @@ const ogImageURL = new URL(ogImagePath, site).href;
     <meta name="twitter:description" content={metaDescription} />
     <meta name="twitter:image" content={ogImageURL} />
     <title>{pageTitle}</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;600;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@500;600;700;800&display=swap" rel="stylesheet" />
     <slot name="head" />
   </head>
-  <body class="min-h-screen bg-slate-950 text-white">
+  <body class="min-h-screen text-white antialiased overflow-x-clip">
+    <!-- scroll progress -->
+    <div id="scroll-progress" class="fixed top-0 left-0 z-[80] h-[3px] w-full origin-left scale-x-0 bg-gradient-to-r from-[#5865f2] via-[#67e8f9] to-[#a78bfa]"></div>
+
+    <!-- ambient cursor glow + grain -->
+    <div id="cursor-glow" class="pointer-events-none fixed z-[5] h-[520px] w-[520px] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-[0.16] blur-[110px] transition-opacity duration-500 hidden md:block" style="background: radial-gradient(circle, #5865f2 0%, #67e8f9 35%, transparent 70%); left:50%; top:20%;"></div>
+    <div class="pointer-events-none fixed inset-0 z-[4] opacity-[0.07] mix-blend-overlay" style="background-image:url(&quot;data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E&quot;)"></div>
+
     <Header />
-    <main class="pt-20 flex-1">
+    <main class="pt-24 sm:pt-28 flex-1 relative">
       <slot />
     </main>
     <Footer />
     <script>
+      // scroll progress
+      const progress = document.getElementById('scroll-progress');
+      const onScroll = () => {
+        const h = document.documentElement;
+        const max = h.scrollHeight - h.clientHeight;
+        const p = max > 0 ? h.scrollTop / max : 0;
+        if (progress) progress.style.transform = `scaleX(${p})`;
+        document.body.classList.toggle('is-scrolled', h.scrollTop > 24);
+      };
+      document.addEventListener('scroll', onScroll, { passive: true });
+      onScroll();
+
+      // cursor glow follows mouse (desktop only, subtle)
+      const glow = document.getElementById('cursor-glow');
+      let gx = window.innerWidth / 2, gy = 200, tx = gx, ty = gy;
+      window.addEventListener('mousemove', (e) => { tx = e.clientX; ty = e.clientY; }, { passive: true });
+      (function tick() {
+        gx += (tx - gx) * 0.08; gy += (ty - gy) * 0.08;
+        if (glow) { glow.style.left = gx + 'px'; glow.style.top = gy + 'px'; }
+        requestAnimationFrame(tick);
+      })();
+
+      // scroll reveal
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach((en) => {
+          if (en.isIntersecting) {
+            en.target.classList.add('visible');
+            io.unobserve(en.target);
+          }
+        });
+      }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+      const observeReveals = () => {
+        document.querySelectorAll('.reveal:not(.visible), .stagger:not(.visible)').forEach((el) => io.observe(el));
+      };
+      observeReveals();
+
+      // subtle 3D tilt for cards
+      const tiltEls = document.querySelectorAll('[data-tilt]');
+      const fine = window.matchMedia('(pointer: fine)').matches;
+      tiltEls.forEach((card) => {
+        if (!fine) return;
+        card.addEventListener('mousemove', (e) => {
+          const r = card.getBoundingClientRect();
+          const px = (e.clientX - r.left) / r.width - 0.5;
+          const py = (e.clientY - r.top) / r.height - 0.5;
+          card.style.transform = `perspective(900px) rotateX(${(-py * 7).toFixed(2)}deg) rotateY(${(px * 9).toFixed(2)}deg) translateY(-6px)`;
+        });
+        card.addEventListener('mouseleave', () => {
+          card.style.transform = '';
+        });
+      });
+
+      // stagger delay helper via --d
+      document.querySelectorAll('[data-delay]').forEach((el) => {
+        el.style.setProperty('--d', el.getAttribute('data-delay') + 'ms');
+      });
+
+      // legacy modal handling (kept for ImageModal)
       document.querySelectorAll('[data-modal-target]').forEach((el) => {
         el.addEventListener('click', () => {
           const modalId = el.getAttribute('data-modal-target');
           if (!modalId) return;
           const modal = document.getElementById(modalId);
-          if (modal) modal.classList.remove('hidden');
+          if (modal) {
+            modal.classList.remove('hidden');
+            requestAnimationFrame(() => modal.classList.add('visible'));
+          }
         });
       });
 
@@ -75,11 +143,14 @@ const ogImageURL = new URL(ogImagePath, site).href;
         if (closeButton) {
           closeButton.addEventListener('click', () => {
             modal.classList.add('hidden');
+            modal.classList.remove('visible');
           });
         }
-
         modal.addEventListener('click', (e) => {
-          if (e.target === modal) modal.classList.add('hidden');
+          if (e.target === modal) {
+            modal.classList.add('hidden');
+            modal.classList.remove('visible');
+          }
         });
       });
 
@@ -87,8 +158,16 @@ const ogImageURL = new URL(ogImagePath, site).href;
         if (e.key !== 'Escape') return;
         document.querySelectorAll('[id^="modal-"]').forEach((modal) => {
           modal.classList.add('hidden');
+          modal.classList.remove('visible');
         });
       });
     </script>
+    <style>
+      body.is-scrolled #site-header-inner {
+        background: rgba(5,7,15,.78);
+        border-color: rgba(255,255,255,.14);
+        box-shadow: 0 18px 50px -12px rgba(0,0,0,.7), 0 0 0 1px rgba(88,101,242,.12);
+      }
+    </style>
   </body>
 </html>
